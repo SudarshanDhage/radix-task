@@ -56,7 +56,7 @@ vercel env add RESEND_FROM_EMAIL production
 ## Step 4: Test Email Sending
 
 ### Test via Your Live Site
-1. Visit your deployed site: https://radix-task-ten.vercel.app
+1. Visit your deployed site: https://redistask.shop
 2. Enter an email in the signup form
 3. Submit the form
 4. Check your email inbox (and spam folder)
@@ -79,7 +79,7 @@ vercel env add RESEND_FROM_EMAIL production
 ### Email Template
 - **Subject**: "🎉 Welcome to TaskMan! Your exclusive discount code inside"
 - **Content**: HTML email with coupon code and "Get Started" button
-- **Link**: Points to https://taskman.com
+- **Link**: Points to https://redistask.shop
 
 ### Email Flow
 1. User signs up with email

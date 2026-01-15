@@ -46,7 +46,7 @@ export function getCouponEmailHtml(data: CouponEmailData): string {
     </div>
     
     <div style="text-align: center; margin: 40px 0;">
-      <a href="https://taskman.com" 
+      <a href="https://redistask.shop" 
          style="background: #0634FF; color: #FFFFFF; padding: 14px 32px; text-decoration: none; border-radius: 100px; display: inline-block; font-weight: 500; font-size: 16px;">
         Get Started Now
       </a>
