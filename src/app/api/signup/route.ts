@@ -81,19 +81,27 @@ export async function POST(request: NextRequest) {
         expiryDate: coupon.validUntil?.toISOString(),
       });
 
+      const fromEmail = process.env.RESEND_FROM_EMAIL || 'TaskMan <onboarding@resend.dev>';
+      
+      // Debug logging (remove in production if needed)
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Sending email:', { from: fromEmail, to: email, hasApiKey: !!process.env.RESEND_API_KEY });
+      }
+
       const { data: emailData, error: emailError } = await resend.emails.send({
-        from: process.env.RESEND_FROM_EMAIL || 'TaskMan <onboarding@resend.dev>',
+        from: fromEmail,
         to: email,
         subject: getCouponEmailSubject(),
         html: emailHtml,
       });
 
       if (emailError) {
-        console.error('Email sending error:', emailError);
-        await markEmailSent(email, false, emailError.message);
+        console.error('Email sending error:', JSON.stringify(emailError, null, 2));
+        const errorMessage = emailError.message || JSON.stringify(emailError);
+        await markEmailSent(email, false, errorMessage);
         
         if (userSignup) {
-          await logEmail(userSignup.id, email, 'failed', emailError.message, emailError);
+          await logEmail(userSignup.id, email, 'failed', errorMessage, emailError);
         }
         
         // Still return success since signup was saved
@@ -118,11 +126,15 @@ export async function POST(request: NextRequest) {
       });
     } catch (emailError) {
       console.error('Email sending exception:', emailError);
-      const errorMessage = emailError instanceof Error ? emailError.message : 'Unknown error';
+      const errorMessage = emailError instanceof Error 
+        ? emailError.message 
+        : typeof emailError === 'string' 
+          ? emailError 
+          : JSON.stringify(emailError);
       await markEmailSent(email, false, errorMessage);
       
       if (userSignup) {
-        await logEmail(userSignup.id, email, 'failed', errorMessage);
+        await logEmail(userSignup.id, email, 'failed', errorMessage, emailError);
       }
 
       // Still return success since signup was saved
