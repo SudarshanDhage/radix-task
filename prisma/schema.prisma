@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // Connection URLs are configured in prisma.config.ts
+}
+
+model Coupon {
+  id           String   @id @default(uuid())
+  code         String   @unique @db.VarChar(50)
+  discountType String   @map("discount_type") @db.VarChar(20)
+  discountValue Decimal  @map("discount_value") @db.Decimal(10, 2)
+  description  String?   @db.Text
+  validFrom    DateTime  @map("valid_from") @default(now())
+  validUntil   DateTime? @map("valid_until")
+  maxUses      Int?      @map("max_uses")
+  currentUses   Int       @map("current_uses") @default(0)
+  isActive     Boolean   @map("is_active") @default(true)
+  createdAt    DateTime  @map("created_at") @default(now())
+  updatedAt    DateTime  @map("updated_at") @updatedAt
+
+  userSignups UserSignup[]
+
+  @@index([code])
+  @@index([isActive, validFrom, validUntil])
+  @@map("coupons")
+}
+
+model UserSignup {
+  id          String    @id @default(uuid())
+  email       String    @unique @db.VarChar(255)
+  couponId    String?   @map("coupon_id")
+  couponCode String?   @map("coupon_code") @db.VarChar(50)
+  emailSent   Boolean   @map("email_sent") @default(false)
+  emailSentAt DateTime? @map("email_sent_at")
+  emailError  String?   @map("email_error") @db.Text
+  createdAt   DateTime  @map("created_at") @default(now())
+  updatedAt   DateTime  @map("updated_at") @updatedAt
+
+  coupon     Coupon?   @relation(fields: [couponId], references: [id])
+  emailLogs   EmailLog[]
+
+  @@index([email])
+  @@index([couponId])
+  @@map("user_signups")
+}
+
+model EmailLog {
+  id              String    @id @default(uuid())
+  userSignupId    String    @map("user_signup_id")
+  email           String    @db.VarChar(255)
+  status          String    @db.VarChar(20)
+  errorMessage    String?   @map("error_message") @db.Text
+  providerResponse Json?     @map("provider_response")
+  createdAt       DateTime  @map("created_at") @default(now())
+
+  userSignup      UserSignup @relation(fields: [userSignupId], references: [id])
+
+  @@index([userSignupId])
+  @@index([status])
+  @@map("email_logs")
+}

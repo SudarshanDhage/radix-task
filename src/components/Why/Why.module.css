@@ -1,0 +1,355 @@
+.why {
+  position: relative;
+  width: 100%;
+  padding: clamp(12rem, 18vw, 15rem) 0 clamp(12rem, 18vw, 15rem) 0;
+  overflow: hidden;
+  z-index: var(--z-content);
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3rem);
+  align-items: center;
+}
+
+@keyframes slideUpFromBottom1 {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100px) translateY(-5%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5%);
+  }
+}
+
+@keyframes slideUpFromBottom2 {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatWhy1 {
+  0%, 100% {
+    transform: translateX(-50%) translateY(-5%);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-6.5%);
+  }
+}
+
+@keyframes floatWhy2 {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Illustration */
+.illustrationWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.illustration {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.illustration1 {
+  background-image: url('/assets/why/Why_Illustration-1.svg');
+  z-index: 1;
+  width: 110%;
+  height: 110%;
+  min-height: 50vh;
+  top: -5%;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+}
+
+.illustration2 {
+  background-image: url('/assets/why/Why_Illustration-2.svg');
+  z-index: 2;
+  width: 115%;
+  height: 115%;
+  top: calc(110% - 115% + 32%);
+  left: calc(50% + 73% - 115%);
+  transform: scale(0);
+}
+
+/* Illustration 1 appears after ellipse, sliding up from bottom */
+.illustrationVisible.illustration1 {
+  animation: 
+    slideUpFromBottom1 0.8s ease-out 2.5s forwards,
+    floatWhy1 3s ease-in-out 3.3s infinite;
+}
+
+/* Illustration 2 appears after illustration 1, sliding up from bottom */
+.illustrationVisible.illustration2 {
+  animation: 
+    slideUpFromBottom2 0.8s ease-out 3.3s forwards,
+    floatWhy2 3s ease-in-out 4.1s infinite;
+}
+
+/* Text Content */
+.textContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 552px;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: var(--font-family-heading), sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 3.125rem);
+  line-height: clamp(1.8rem, 3.125vw, 3.75rem);
+  letter-spacing: 0px;
+  color: var(--color-text);
+  text-align: left;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  width: 100%;
+  /* Title is visible immediately - no animation */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.description {
+  font-family: var(--font-family-primary), sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(1rem, 0.94vw, 1.125rem);
+  line-height: clamp(1.5rem, 1.56vw, 1.875rem);
+  letter-spacing: 0px;
+  color: var(--color-text-muted);
+  text-align: left;
+  margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
+  width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Description slides up from bottom after illustration 2 */
+.visible .description {
+  animation: slideUpFadeIn 0.6s ease-out 4.1s forwards;
+}
+
+@keyframes slideUpFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.learnMoreWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Learn more button appears after description */
+.visible .learnMoreWrapper {
+  animation: slideUpFadeIn 0.6s ease-out 4.7s forwards;
+}
+
+.learnMoreLink {
+  font-family: var(--font-family-primary), sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(1rem, 0.94vw, 1.125rem);
+  line-height: clamp(1.5rem, 1.56vw, 1.875rem);
+  letter-spacing: 0px;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: var(--transition-base);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.learnMoreLink:hover {
+  color: var(--color-primary);
+}
+
+.learnMoreLink:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.learnMoreArrow {
+  width: clamp(20px, 1.35vw, 26px);
+  height: clamp(10px, 0.625vw, 12px);
+  background: transparent url('/assets/why/Arrow_icon.svg') 0% 0% no-repeat padding-box;
+  background-size: contain;
+  background-position: center;
+  transition: transform var(--transition-base);
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+/* Arrow comes from left and moves slightly to right after button */
+.visible .learnMoreArrow {
+  animation: arrowSlideIn 0.6s ease-out 5.3s forwards;
+}
+
+@keyframes arrowSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(5px);
+  }
+}
+
+.learnMoreWrapper:hover .learnMoreArrow {
+  transform: translateX(10px) !important;
+}
+
+/* Tablet and Desktop - Side by side layout */
+@media (min-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .illustrationWrapper {
+    justify-content: flex-start;
+  }
+
+  .textContent {
+    margin: 0;
+  }
+}
+
+/* Large Desktop (1920px+) */
+@media (min-width: 1920px) {
+  .title {
+    font-size: 3.125rem;
+    line-height: 3.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    font-size: 1.125rem;
+    line-height: 1.875rem;
+    margin-bottom: 2rem;
+  }
+
+  .learnMoreLink {
+    font-size: 1.125rem;
+    line-height: 1.875rem;
+  }
+
+  .learnMoreArrow {
+    width: 26px;
+    height: 12px;
+  }
+
+  .illustrationWrapper {
+    min-height: 50vh;
+  }
+  
+  .illustration1 {
+    width: 110%;
+    height: 110%;
+    min-height: 50vh;
+  }
+  
+  .illustration2 {
+    width: 115%;
+    height: 115%;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .why {
+    padding: 2rem 0;
+  }
+
+  .illustrationWrapper {
+    min-height: 50vh;
+  }
+
+  .illustration1,
+  .illustration2 {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .illustration1 {
+    min-height: 50vh;
+  }
+  
+  .illustration2 {
+    width: 95%;
+    height: 95%;
+  }
+
+  .textContent {
+    align-items: center;
+    text-align: center;
+  }
+
+  .title,
+  .description {
+    text-align: center;
+  }
+
+  .learnMoreWrapper {
+    justify-content: center;
+  }
+}
+
+/* Small mobile adjustments */
+@media (max-width: 480px) {
+  .illustrationWrapper {
+    min-height: 50vh;
+  }
+
+  .illustration1 {
+    width: 110%;
+    height: 110%;
+    min-height: 50vh;
+  }
+  
+  .illustration2 {
+    width: 115%;
+    height: 115%;
+  }
+}

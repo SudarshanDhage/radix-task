@@ -1,0 +1,134 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  /* Colors */
+  --color-primary: #0634FF;
+  --color-primary-hover: #0528CC;
+  --color-primary-light: #3b5eff;
+  --color-text: rgba(30, 28, 36, 1);
+  --color-text-muted: rgba(177, 170, 170, 1);
+  --color-text-placeholder: rgba(30, 28, 36, 0.85);
+  --color-background: #FFFFFF;
+  --color-border: #EBEBEB;
+  --color-border-light: #E0E0E0;
+  --color-border-lighter: #F0F0F0;
+  --color-shadow: rgba(6, 52, 255, 0.34);
+  --color-shadow-hover: rgba(6, 52, 255, 0.5);
+  --color-shadow-light: rgba(6, 52, 255, 0.1);
+  --color-shadow-button: rgba(6, 52, 255, 0.3);
+  
+  /* Spacing */
+  --spacing-xs: clamp(0.5rem, 1vw, 1rem);
+  --spacing-sm: clamp(1rem, 2vw, 1.5rem);
+  --spacing-md: clamp(2rem, 4vw, 3rem);
+  --spacing-lg: clamp(3rem, 6vw, 4.5rem);
+  --spacing-xl: clamp(4rem, 8vw, 7rem);
+  
+  /* Container */
+  --container-max-width: 1920px;
+  --container-padding: clamp(1rem, 9.27vw, 11.125rem);
+  
+  /* Typography */
+  --font-family-primary: var(--font-poppins), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-heading: var(--font-rubik), sans-serif;
+  
+  /* Button */
+  --button-height: clamp(3rem, 4vw, 4.8125rem);
+  --button-height-small: clamp(2.5rem, 3.5vw, 4.8125rem);
+  --button-border-radius: 100px;
+  --button-padding-x: clamp(1.5rem, 2vw, 2.5rem);
+  --button-transition: all 0.3s ease;
+  
+  /* Input */
+  --input-height: clamp(3rem, 4vw, 4.8125rem);
+  --input-border-width: 2px;
+  --input-border-radius: 100px;
+  --input-padding-x: clamp(1rem, 1.5vw, 1.5rem);
+  --input-transition: all 0.3s ease;
+  
+  /* Z-index scale */
+  --z-base: 0;
+  --z-shapes: 1;
+  --z-content: 2;
+  --z-header: 10;
+  --z-dropdown: 1000;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  
+  /* Transitions */
+  --transition-duration-fast: 0.2s;
+  --transition-duration-base: 0.3s;
+  --transition-duration-slow: 1s;
+  --transition-timing-base: ease;
+  --transition-timing-bounce: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-timing-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Combined transition shortcuts */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 1s ease;
+  --transition-bounce: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* Hero illustration positioning - fixed values for consistent display */
+  --hero-illustration-top: 55%;
+  --hero-illustration-left: 47%;
+  --hero-illustration-width: 1100px;
+  --hero-illustration-min-width: 1100px;
+  --hero-illustration-height: 900px;
+  
+  /* Why shape positioning */
+  --why-shape-top: 55%;
+  --why-shape-left: -48vw;
+  --why-shape-width: 120vw;
+  --why-shape-height: 150vh;
+  
+  /* Hero shapes - fixed values for consistent display */
+  --hero-shapes-left: 56%;
+  --hero-shapes-width: 1920px;
+  --hero-shapes-height: 150%;
+  
+  /* Opacity */
+  --opacity-disabled: 0.36;
+  --opacity-muted: 0.7;
+  --opacity-hover: 0.9;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: var(--color-background);
+  font-family: var(--font-family-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Shared container utility class */
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+

@@ -1,0 +1,106 @@
+.signup {
+  position: relative;
+  width: 100%;
+  padding: clamp(6rem, 10vw, 8rem) 0 clamp(3rem, 6vw, 5rem) 0;
+  overflow: hidden;
+  z-index: var(--z-content);
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 787px;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: var(--font-family-heading), sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 3.125rem);
+  line-height: clamp(1.8rem, 3.125vw, 3.75rem);
+  letter-spacing: 0px;
+  color: var(--color-text);
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+  /* Title is visible immediately - no animation */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.description {
+  font-family: var(--font-family-primary), sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(1rem, 1.41vw, 1.6875rem);
+  line-height: clamp(1.5rem, 1.82vw, 2.1875rem);
+  letter-spacing: 0px;
+  color: var(--color-text);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  text-align: center;
+  max-width: 552px;
+  /* Description is visible immediately - no animation */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ctaGroup {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* Only the button/form comes from bottom after 0.5 second */
+.visible .ctaGroup {
+  animation: slideUpFromBottom 1.5s ease-out 0.5s forwards;
+}
+
+@keyframes slideUpFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Tablet and Desktop - Horizontal layout */
+@media (min-width: 768px) {
+  /* Form styles handled by EmailForm component */
+}
+
+/* Large Desktop (1920px+) */
+@media (min-width: 1920px) {
+  .title {
+    font-size: 3.125rem;
+    line-height: 3.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    font-size: 1.6875rem;
+    line-height: 2.1875rem;
+    margin-bottom: 3.5rem;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .signup {
+    padding: 4rem 0;
+  }
+
+  /* Form styles handled by EmailForm component */
+}
