@@ -1,0 +1,216 @@
+.benefits {
+  position: relative;
+  width: 100%;
+  padding: clamp(5rem, 10vw, 8rem) 0 0 0;
+  z-index: var(--z-content);
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-family: var(--font-family-heading), sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 3.125rem);
+  line-height: clamp(1.8rem, 3.125vw, 3.75rem);
+  letter-spacing: 0px;
+  color: var(--color-text);
+  text-align: center;
+  width: 100%;
+  max-width: 787px;
+  margin: 0 auto clamp(3rem, 6vw, 5rem) auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-duration-slow) var(--transition-timing-base), transform var(--transition-duration-slow) var(--transition-timing-bounce);
+}
+
+.visible .title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3rem);
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.benefitCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Icons */
+.iconTrack,
+.iconPrioritize,
+.iconCollaborate {
+  width: clamp(80px, 5.5vw, 106px);
+  height: clamp(65px, 4.4vw, 85px);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
+  transition: transform 0.4s var(--transition-elastic);
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+/* Hover effect - works after animation completes */
+.iconTrack:hover,
+.iconPrioritize:hover,
+.iconCollaborate:hover {
+  transform: scale(1.15) translateY(-5px) !important;
+}
+
+/* Icon animations - appear first */
+.iconVisible[data-index="0"] {
+  animation: iconFadeIn 0.5s ease-out 1s forwards;
+}
+
+.iconVisible[data-index="1"] {
+  animation: iconFadeIn 0.5s ease-out 2.5s forwards;
+}
+
+.iconVisible[data-index="2"] {
+  animation: iconFadeIn 0.5s ease-out 4s forwards;
+}
+
+@keyframes iconFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.iconTrack {
+  background-image: url('/assets/benefits/Benefits_Icon_Track.svg');
+}
+
+.iconPrioritize {
+  background-image: url('/assets/benefits/Benefits_Icon_Priotitize.svg');
+}
+
+.iconCollaborate {
+  background-image: url('/assets/benefits/Benefits_Icon_Collaborate.svg');
+}
+
+.benefitTitle {
+  font-family: var(--font-family-heading), sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(1.125rem, 1.3vw, 1.5625rem);
+  line-height: clamp(1.5rem, 3.75vw, 3.75rem);
+  letter-spacing: 0px;
+  color: var(--color-text);
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Title animations - slide up from bottom after icon */
+.titleVisible[data-index="0"] {
+  animation: slideUpFadeIn 0.6s ease-out 1.5s forwards;
+}
+
+.titleVisible[data-index="1"] {
+  animation: slideUpFadeIn 0.6s ease-out 3s forwards;
+}
+
+.titleVisible[data-index="2"] {
+  animation: slideUpFadeIn 0.6s ease-out 4.5s forwards;
+}
+
+@keyframes slideUpFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.benefitDescription {
+  font-family: var(--font-family-primary), sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  line-height: clamp(1.375rem, 1.625vw, 1.625rem);
+  letter-spacing: 0px;
+  color: var(--color-text-muted);
+  text-align: center;
+  max-width: 310px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Description animations - slide up from bottom after title */
+.descriptionVisible[data-index="0"] {
+  animation: slideUpFadeIn 0.6s ease-out 2s forwards;
+}
+
+.descriptionVisible[data-index="1"] {
+  animation: slideUpFadeIn 0.6s ease-out 3.5s forwards;
+}
+
+.descriptionVisible[data-index="2"] {
+  animation: slideUpFadeIn 0.6s ease-out 5s forwards;
+}
+
+/* Tablet and Desktop - 3 columns */
+@media (min-width: 768px) {
+  .benefitsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .benefitCard {
+    padding: 0 clamp(0.5rem, 1vw, 1rem);
+  }
+}
+
+/* Large Desktop (1920px+) */
+@media (min-width: 1920px) {
+  .title {
+    margin-bottom: 5rem;
+  }
+
+  .iconTrack,
+  .iconPrioritize,
+  .iconCollaborate {
+    width: 106px;
+    height: 85px;
+    margin-bottom: 2rem;
+  }
+
+  .benefitTitle {
+    font-size: 1.5625rem;
+    line-height: 3.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .benefitDescription {
+    font-size: 1rem;
+    line-height: 1.625rem;
+  }
+}

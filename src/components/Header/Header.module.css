@@ -1,0 +1,119 @@
+.header {
+  position: relative;
+  width: 100%;
+  z-index: var(--z-header);
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 4.4375rem var(--container-padding) 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  text-align: left;
+  font-family: var(--font-family-heading), sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: clamp(1.5rem, 1.56vw, 1.875rem);
+  line-height: clamp(1.5rem, 1.875vw, 2.25rem);
+  letter-spacing: 0px;
+  color: var(--color-text);
+  opacity: 1;
+  white-space: nowrap;
+}
+
+.tryForFreeButton {
+  height: var(--button-height-small);
+  padding: 0 var(--button-padding-x);
+  background: transparent;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--button-transition);
+  white-space: nowrap;
+}
+
+.tryForFreeButton:hover {
+  background: transparent;
+  border-color: var(--color-border-lighter);
+  transform: translateY(-2px);
+}
+
+.tryForFreeButton:active {
+  transform: translateY(0);
+  background: transparent;
+}
+
+.tryForFreeButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.buttonText {
+  font-family: var(--font-family-primary), sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(0.875rem, 1.2vw, 1.4375rem);
+  line-height: clamp(2.5rem, 4.74vw, 5.6875rem);
+  letter-spacing: clamp(0.04rem, 0.048vw, 0.0575rem);
+  color: var(--color-border-light);
+  text-align: center;
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) {
+  .container {
+    padding: 3rem clamp(1rem, 5vw, 5rem) 0;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-sm) var(--spacing-sm) 0;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+  }
+
+  .tryForFreeButton {
+    height: 2.5rem;
+    padding: 0 1.25rem;
+  }
+
+  .buttonText {
+    font-size: 0.875rem;
+    line-height: 2.5rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: 0.75rem 0.75rem 0;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+  }
+
+  .tryForFreeButton {
+    height: 2.25rem;
+    padding: 0 var(--spacing-sm);
+  }
+
+  .buttonText {
+    font-size: 0.75rem;
+    line-height: 2.25rem;
+  }
+}
